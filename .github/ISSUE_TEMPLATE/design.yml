@@ -1,0 +1,48 @@
+name: Design Task
+description: UML diagram, class design, design pattern or documentation
+title: "[Design]: "
+labels: ["design"]
+body:
+  - type: dropdown
+    id: artifact
+    attributes:
+      label: Design Artifact
+      options:
+        - Use-Case Diagram / Descriptions
+        - Class Diagram
+        - Sequence Diagram
+        - Activity Diagram
+        - State Diagram
+        - Package Diagram
+        - Design Decision
+        - Requirements / Documentation
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: trace
+    attributes:
+      label: Related Use Case / Requirement
+      placeholder: "UC5, FR-11, BR-04"
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      placeholder: "Sequence diagram for Admit Patient showing NurseMenu, AdmissionService, Hospital, Room, Admission, JsonRepository."
+    validations:
+      required: true
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Deliverables
+      value: |
+        - [ ] Diagram source (.mmd / .drawio / .dot) in docs/
+        - [ ] Exported .png next to the source
+        - [ ] Linked from the assignment's README.md
+        - [ ] Decision recorded in docs/design-decisions.md (if any)
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Open Questions / Notes

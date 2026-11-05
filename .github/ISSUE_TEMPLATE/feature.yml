@@ -1,0 +1,57 @@
+name: Feature
+description: Implement a user story or functional requirement
+title: "[Feature]: "
+labels: ["feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        One issue = one user story or one small, reviewable task (1–2 days of work).
+  - type: input
+    id: story
+    attributes:
+      label: User Story / Requirement
+      placeholder: "US-AP-01 Book an Appointment (FR-04, UC2)"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      placeholder: "As a receptionist, I want to book an appointment for a patient with a doctor so that the patient is scheduled to be seen."
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      value: |
+        - [ ] 
+        - [ ] 
+        - [ ] pytest test added and passing
+    validations:
+      required: true
+  - type: input
+    id: classes
+    attributes:
+      label: Affected Classes / Modules
+      placeholder: "AppointmentService, Appointment, Hospital"
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options: ["Must Have", "Should Have", "Could Have"]
+    validations:
+      required: true
+  - type: dropdown
+    id: size
+    attributes:
+      label: Size
+      options: ["S (< 2 hours)", "M (half day)", "L (1–2 days)"]
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes / Dependencies
+      placeholder: "Blocked by #3"
