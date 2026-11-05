@@ -1,0 +1,38 @@
+sequenceDiagram
+    actor R as Receptionist
+    participant M as ReceptionistMenu
+    participant S as AppointmentService
+    participant H as Hospital
+    participant A as Appointment
+    participant J as JsonRepository
+    R->>M: Book Appointment (patient ID, doctor ID, date, hour)
+    M->>S: book(patient_id, doctor_id, slot)
+    S->>H: find_patient(patient_id)
+    H-->>S: Patient or None
+    alt patient not found
+        S-->>M: error "Patient is not registered" (BR-01)
+    else patient found
+        S->>H: find_staff(doctor_id)
+        H-->>S: Staff or None
+        alt not found or not a Doctor
+            S-->>M: error "Doctor ID not found"
+        else doctor found
+            S->>H: appointments_for(doctor_id, day)
+            H-->>S: doctor's appointments that day
+            S->>S: any blocks_slot() at this hour?
+            alt doctor already booked (BR-02)
+                S->>S: available_slots(doctor_id, day)
+                S-->>M: ConflictError with free slots
+            else patient already booked at this hour
+                S-->>M: error "Patient already has an appointment then"
+            else slot free
+                S->>A: create(id, patient_id, doctor_id, slot)
+                Note right of A: status = SCHEDULED
+                S->>H: add(appointment)
+                S->>J: save(hospital)
+                J-->>S: committed
+                S-->>M: Appointment
+            end
+        end
+    end
+    M-->>R: confirmation, error, or list of free slots
