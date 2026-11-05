@@ -14,9 +14,6 @@ A menu-driven Python application that helps the staff of a small hospital or cli
 - [Tech Stack](#tech-stack)
 - [Repository Structure](#repository-structure)
 - [Getting Started](#getting-started)
-- [Workflow](#workflow)
-- [Project Milestones](#project-milestones)
-- [Team](#team)
 
 ---
 
@@ -113,29 +110,3 @@ python -m src.hpms.main
 ```bash
 pytest
 ```
-
-## Workflow
-1. Every task starts as an **Issue** (use the Feature, Design or Bug template).
-2. Create a branch from `main`: `feature/<issue#>-short-name`, `docs/<issue#>-short-name` or `fix/<issue#>-short-name`.
-3. Commit with [Conventional Commits](https://www.conventionalcommits.org/), e.g. `feat(appointments): reject double booking (#12)` or `docs(sp5): add sequence diagrams`.
-4. Open a Pull Request that includes `Closes #<issue#>`.
-5. At least **one teammate review** before merging into `main`.
-
-## Project Milestones
-| Milestone | Deliverable | Status |
-|---|---|---|
-| SP1 | Project Proposal | ✅ Submitted Sep 30, 2026 |
-| SP2 | Requirements Collection | ✅ Submitted Oct 7, 2026 |
-| SP3 | User Stories | ✅ Submitted Oct 17, 2026 |
-| SP4 | System Design | ✅ Submitted |
-| SP5 | UML Design | ✅ Submitted |
-| — | Implementation, testing, final report, presentation | ⏳ In progress |
-
-## Team
-| Name | Role | GitHub |
-|---|---|---|
-| Sumaya Sharmin | | |
-| Shreya Hada Shrestha | | |
-| Ritika Khatri | | |
-| Sahar Tahir | | |
-| Thel Theint Theint Sen | | [@hannay-sen](https://github.com/hannay-sen) |
