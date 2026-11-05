@@ -1,0 +1,72 @@
+---
+config:
+  layout: elk
+---
+classDiagram
+    direction TB
+    class MainMenu {
+        +run() None
+        -select_role() None
+    }
+    class RoleMenu {
+        <<abstract>>
+        +show()* None
+    }
+    class ReceptionistMenu
+    class DoctorMenu {
+        -doctor_id: str
+    }
+    class NurseMenu {
+        -nurse_id: str
+    }
+    class AdministratorMenu
+    class BaseService {
+        <<abstract>>
+        #hospital: Hospital
+        #repository: JsonRepository
+        #commit() None
+    }
+    class Hospital {
+        -patients: dict~str, Patient~
+        -staff: dict~str, Staff~
+        -departments: dict~str, Department~
+        -rooms: dict~str, Room~
+        -appointments: dict~str, Appointment~
+        -admissions: dict~str, Admission~
+        -bills: dict~str, Bill~
+        +find_patient(patient_id: str) Optional~Patient~
+        +search_patients(term: str) list~Patient~
+        +find_staff(staff_id: str) Optional~Staff~
+        +find_room(room_number: str) Optional~Room~
+        +find_admission(admission_id: str) Optional~Admission~
+        +find_bill(bill_id: str) Optional~Bill~
+        +appointments_for(doctor_id: str, day: date) list~Appointment~
+        +active_admission_for(patient_id: str) Optional~Admission~
+        +add(entity) None
+    }
+    class JsonRepository {
+        -path: str
+        +load() Hospital
+        +save(hospital: Hospital) None
+    }
+    class StaffFactory {
+        +create_staff(role: StaffRole, data: dict)$ Staff
+    }
+
+    MainMenu --> RoleMenu : opens
+    RoleMenu <|-- ReceptionistMenu
+    RoleMenu <|-- DoctorMenu
+    RoleMenu <|-- NurseMenu
+    RoleMenu <|-- AdministratorMenu
+    RoleMenu ..> BaseService : calls
+    BaseService <|-- PatientService
+    BaseService <|-- AppointmentService
+    BaseService <|-- MedicalRecordService
+    BaseService <|-- AdmissionService
+    BaseService <|-- BillingService
+    BaseService <|-- StaffService
+    BaseService <|-- ReportService
+    BaseService --> "1" Hospital : works on
+    BaseService --> "1" JsonRepository : commits through
+    StaffService ..> StaffFactory : uses
+    JsonRepository ..> Hospital : loads and saves

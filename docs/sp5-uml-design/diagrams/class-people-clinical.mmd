@@ -1,0 +1,84 @@
+---
+config:
+  layout: elk
+---
+classDiagram
+    direction TB
+    class Person {
+        <<abstract>>
+        -id: str
+        -name: str
+        -date_of_birth: date
+        -contact: str
+        +get_age(on_date: date) int
+        +validate() None
+    }
+    class Patient {
+        -medical_record: MedicalRecord
+        +get_medical_record() MedicalRecord
+        +update_details(name: str, contact: str) None
+    }
+    class Staff {
+        <<abstract>>
+        -department_id: str
+        -shift: str
+        +get_role() StaffRole
+        +get_duties()* list~str~
+    }
+    class Doctor {
+        -specialty: str
+        +get_duties() list~str~
+    }
+    class Nurse {
+        -ward: str
+        +get_duties() list~str~
+    }
+    class Receptionist {
+        +get_duties() list~str~
+    }
+    class StaffRole {
+        <<enumeration>>
+        DOCTOR
+        NURSE
+        RECEPTIONIST
+    }
+    class Department {
+        -department_id: str
+        -name: str
+        -staff_ids: list~str~
+        +add_staff(staff_id: str) None
+        +remove_staff(staff_id: str) None
+    }
+    class MedicalRecord {
+        -record_id: str
+        -_diagnoses: list~Diagnosis~
+        -_prescriptions: list~Prescription~
+        +add_diagnosis(d: Diagnosis) None
+        +add_prescription(p: Prescription) None
+        +get_history() list
+    }
+    class Diagnosis {
+        -description: str
+        -doctor_id: str
+        -recorded_at: datetime
+        -appointment_id: Optional~str~
+    }
+    class Prescription {
+        -medication: str
+        -dosage: str
+        -instructions: str
+        -doctor_id: str
+        -recorded_at: datetime
+        -appointment_id: Optional~str~
+    }
+
+    Person <|-- Patient
+    Person <|-- Staff
+    Staff <|-- Doctor
+    Staff <|-- Nurse
+    Staff <|-- Receptionist
+    Staff ..> StaffRole
+    Department "1" o-- "*" Staff : groups
+    Patient "1" *-- "1" MedicalRecord : owns
+    MedicalRecord "1" *-- "*" Diagnosis
+    MedicalRecord "1" *-- "*" Prescription
