@@ -1,4 +1,4 @@
-# Hospital Patient Management System (HPMS)
+# Pulse - Hospital Patient Management System
 
 A menu-driven Python application that helps the staff of a small hospital or clinic manage patients, staff, appointments, medical records, inpatient admissions, rooms and billing — built to practice object-oriented analysis, design and implementation.
 
