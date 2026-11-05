@@ -1,7 +1,0 @@
-stateDiagram-v2
-    [*] --> Available : room created by administrator or sample data
-    Available --> Occupied : admit patient
-    Occupied --> Available : discharge patient
-    Available --> Maintenance : nurse sets maintenance
-    Maintenance --> Available : nurse clears maintenance
-    note right of Occupied : Only admit and discharge enter or leave this state. A nurse cannot set Maintenance while Occupied.
